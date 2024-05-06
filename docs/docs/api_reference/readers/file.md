@@ -21,5 +21,6 @@
         - PyMuPDFReader
         - RTFReader
         - UnstructuredReader
+        - UpstageDocumentReader
         - VideoAudioReader
         - XMLReader

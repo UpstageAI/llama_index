@@ -6,6 +6,7 @@ from llama_index.readers.file import (
     HWPReader,
     ImageCaptionReader,
     ImageReader,
+    ImageTabularChartReader,
     ImageVisionLLMReader,
     IPYNBReader,
     MarkdownReader,
@@ -13,9 +14,9 @@ from llama_index.readers.file import (
     PandasCSVReader,
     PDFReader,
     PptxReader,
+    UpstageDocumentReader,
     VideoAudioReader,
     XMLReader,
-    ImageTabularChartReader,
 )
 
 
@@ -66,4 +67,7 @@ def test_classes():
     assert BaseReader.__name__ in names_of_base_classes
 
     names_of_base_classes = [b.__name__ for b in ImageTabularChartReader.__mro__]
+    assert BaseReader.__name__ in names_of_base_classes
+
+    names_of_base_classes = [b.__name__ for b in UpstageDocumentReader.__mro__]
     assert BaseReader.__name__ in names_of_base_classes
