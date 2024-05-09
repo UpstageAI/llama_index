@@ -32,7 +32,7 @@ def validate_api_key(api_key: str) -> None:
         None
     """
     if not api_key:
-        raise ValueError("API Key is required for Upstage Document Loader")
+        raise ValueError("API Key is required for Upstage Document Reader.")
 
 
 def validate_file_path(file_path: str) -> None:
@@ -103,7 +103,7 @@ def get_from_param_or_env(
 
 class UpstageDocumentReader(BaseReader):
     """
-    Upstage Layout Analysis Parser.
+    Upstage Layout Analysis Reader.
 
     To use, you should have the environment variable `UPSTAGE_DOCUMENT_AI_API_KEY`
     set with your API key or pass it as a named parameter to the constructor.
@@ -113,9 +113,9 @@ class UpstageDocumentReader(BaseReader):
 
             from llama_index.readers.file import UpstageDocumentReader
 
-            loader = UpstageDocumentReader()
+            reader = UpstageDocumentReader()
 
-            docs = loader.load_data("path/to/file.pdf")
+            docs = reader.load_data("path/to/file.pdf")
     """
 
     def __init__(
@@ -196,8 +196,8 @@ class UpstageDocumentReader(BaseReader):
             full_docs (str): The full document to be split and requested.
             start_page (int): The starting page number for splitting the document.
             num_pages (int, optional): The number of pages to split the document
-                                             into.
-                                             Defaults to DEFAULT_NUMBER_OF_PAGE.
+                                       into.
+                                       Defaults to DEFAULT_NUMBER_OF_PAGE.
 
         Returns:
             response: The response from the server.
@@ -286,7 +286,7 @@ class UpstageDocumentReader(BaseReader):
         split: SplitType = "none",
     ) -> List[Document]:
         """
-        Load data from a file or list of files.
+        Load data from a file or list of files lazily.
 
         Args:
             file_path (Union[str, Path, List[str], List[Path]]): The path or list of paths to the file(s) to load.
