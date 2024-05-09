@@ -105,7 +105,7 @@ class UpstageDocumentReader(BaseReader):
     """
     Upstage Layout Analysis Reader.
 
-    To use, you should have the environment variable `UPSTAGE_DOCUMENT_AI_API_KEY`
+    To use, you should have the environment variable `UPSTAGE_API_KEY`
     set with your API key or pass it as a named parameter to the constructor.
 
     Example:
@@ -131,14 +131,14 @@ class UpstageDocumentReader(BaseReader):
             api_key (str, optional): The API key for accessing the Upstage API.
                                      Defaults to None, in which case it will be
                                      fetched from the environment variable
-                                     `UPSTAGE_DOCUMENT_AI_API_KEY`.
+                                     `UPSTAGE_API_KEY`.
             use_ocr (bool, optional): Extract text from images in the document.
                                       Defaults to False. (Use text info in PDF file)
             exclude (list, optional): Exclude specific elements from the output.
                                       Defaults to [] (all included).
         """
         self.api_key = get_from_param_or_env(
-            "UPSTAGE_DOCUMENT_AI_API_KEY", api_key, "UPSTAGE_DOCUMENT_AI_API_KEY"
+            "UPSTAGE_API_KEY", api_key, "UPSTAGE_API_KEY"
         )
         self.use_ocr = use_ocr
         self.exclude = exclude
@@ -291,6 +291,17 @@ class UpstageDocumentReader(BaseReader):
         Args:
             file_path (Union[str, Path, List[str], List[Path]]): The path or list of paths to the file(s) to load.
             output_type (Union[OutputType, dict], optional): The desired output type. Defaults to "html".
+            - If a dict is provided, it should be in the format {"category": "output_type"}.
+            - The category could possibly include the following:
+                - "im_table"
+                - "paragraph"
+                - "caption"
+                - "table"
+                - "figure"
+                - "equation"
+                - "footer"
+                - "header"
+            - The output_type can be "text" or "html".
             split (SplitType, optional): The type of splitting to apply. Defaults to "none".
 
         Returns:
